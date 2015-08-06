@@ -7,15 +7,20 @@ chatModule.controller('LogInController', ['$scope', '$location', '$timeout',  fu
 
     var pp = $("#autorisation");
 
-    self.signUp = function() {
+    self.signUp = function(object, form) {
+        if(!form.$valid){
+            return false;
+        }
         var elem = $('#autorisation');
         elem.removeClass('bounceInLeft');
         elem.addClass('bounceOutRight');
+        self.SetCurrentUserName(object.name);
+        self.SetCurrentUserPass(object.password);
         $timeout(function() {
             $location.path('/greeting');
-        }, 1000);
+        }, 900);
 
-
+        //$parent.parentScopeProperty
     };
 
 }]);

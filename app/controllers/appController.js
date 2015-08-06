@@ -9,6 +9,7 @@ chatModule.controller('AppController', ['$scope', function($scope) {
     self.usersRepository = [{name: 'some name'}, {name: 'some text else'}];
     self.roomsRepository = [{name: 'some name'}, {name: 'some text else'}];
     self.messagesRepository = [];
+    self.currentUser = {name:'', password: ''};
 
     self.currentUser = {};
     self.currentUserName = 'Guest';
@@ -17,10 +18,19 @@ chatModule.controller('AppController', ['$scope', function($scope) {
     self.currentMessage = '';
     self.currentRoomIndex = '';
     self.privateFlag = false;
-    self.newRoomName = '';
+    self.newRoomName = 's';
     self.activeRoomFlag = false;
     self.roomCreaterFlag = false;
     self.authorizationFlag = false;
     self.addOrRemove  = false;
+
+
+
+    self.SetCurrentUserName = function(name) {
+        self.currentUserName = name;
+    };
+    self.SetCurrentUserPass = function(pass) {
+        self.currentUserPassword = pass;
+    }
 
 }]);

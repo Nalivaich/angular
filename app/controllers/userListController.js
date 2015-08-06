@@ -9,7 +9,7 @@ chatModule.controller('UserListController', ['$scope', 'userService', function($
     self.templates =
         [ { name: 'template1.html', url: 'app/templates/userList.html'},
             { name: 'template2.html', url: 'autorisation.html'} ];
-    self.template = $scope.templates[0];
+    self.userBlock = $scope.templates[0];
 
     self.show = function() {
 

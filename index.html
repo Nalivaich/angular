@@ -21,7 +21,7 @@
         <div class="row sectionBlock">
             <div class="col-md-2 sectionCols addScroll" ng-controller="UserListController" >
                 <h2 class="text-success col-md-6 col-md-offset-3">Users List: </h2>
-                <div class="slide-animate" ng-include="template.url" ng-model="template">
+                <div class="slide-animate" ng-include="userBlock.url" ng-model="template">
 
                 </div>
 
@@ -52,11 +52,11 @@
             <div class="col-md-2 sectionCols addScroll" ng-controller="RoomListController">
 
                 <div class=" createNewRoom">
-                    <span ng-bind="greeting"></span>
+                    <span ng-bind="newRoomName"></span>
                     <div class="row col-md-offset-3" >
 
-                        <input type="button" value="Create new room" class="btn btn-primary" data-toggle="modal" href="#newRoomModal" data-bind="enable: authorizationFlag" />
-                        <label class="text-primary">Use private Mode: <input type="checkbox" data-bind="checked: privateFlag"/></label>
+                        <input type="button" value="Create new room" class="btn btn-primary" data-toggle="modal" ng-include="roomBlock.url" href="#newRoomModal"   data-bind="enable: authorizationFlag" />
+                        <label class="text-primary">Use private Mode: <input type="checkbox" ng-model="privateFlag" ng-true-value="true" ng-false-value="false"/></label>
                     </div>
 
                     <h2 class="text-success col-md-6 col-md-offset-3">Rooms List: </h2>
@@ -90,7 +90,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" ng-click="sayAlert()" data-dismiss="modal">Create</button>
+                <button type="button" class="btn btn-primary" ng-model="newRoomName" ng-click="sayAlert()" data-dismiss="modal">Create</button>
             </div>
         </div>
     </div>

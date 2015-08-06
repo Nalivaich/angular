@@ -6,12 +6,17 @@ chatModule.controller('RoomListController', ['$scope', function($scope) {
     $scope.greeting = 'Holaaaaaa!';
     var self = $scope;
 
-    $scope.sayAlert = function() {
-        $scope.greeting = 'dfgdfgdfg'
+    self.sayAlert = function() {
+        console.log(44);
     } ;
     self.showAlert = function() {
         alert(6);
     };
+
+    self.templates =
+        [ { name: 'template1.html', url: 'app/templates/userList.html'},
+            { name: 'template2.html', url: 'autorisation.html'} ];
+    self.roomBlock = $scope.templates[0];
 
     /*self.createRoom = function() {
         self.currentRoomIndex(allRoomsVM.add(self.newRoomName(), self.currentUserIndex(), self.privateFlag(), function() {
