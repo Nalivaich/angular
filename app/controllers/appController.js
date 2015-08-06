@@ -7,9 +7,10 @@ chatModule.controller('AppController', ['$scope', function($scope) {
     $scope.newArray= [1,2,3,4];
     self.greeting = 'Hola!';
     self.usersRepository = [{name: 'some name'}, {name: 'some text else'}];
-    self.roomsRepository = [];
+    self.roomsRepository = [{name: 'some name'}, {name: 'some text else'}];
     self.messagesRepository = [];
 
+    self.currentUser = {};
     self.currentUserName = 'Guest';
     self.currentUserPassword = '';
     self.currentUserIndex = 0;
@@ -23,6 +24,3 @@ chatModule.controller('AppController', ['$scope', function($scope) {
     self.addOrRemove  = false;
 
 }]);
-
-
-

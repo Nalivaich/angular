@@ -9,8 +9,11 @@ chatModule.controller('RoomListController', ['$scope', function($scope) {
     $scope.sayAlert = function() {
         $scope.greeting = 'dfgdfgdfg'
     } ;
+    self.showAlert = function() {
+        alert(6);
+    };
 
-    self.createRoom = function() {
+    /*self.createRoom = function() {
         self.currentRoomIndex(allRoomsVM.add(self.newRoomName(), self.currentUserIndex(), self.privateFlag(), function() {
             allUsersVM.addUserRoom(self.currentUserIndex(), self.currentRoomIndex(), function() {
                 self.roomCreaterFlag(allUsersVM.isCurrentUserRoom(self.currentRoomIndex() , self.currentUserIndex()));
@@ -19,5 +22,5 @@ chatModule.controller('RoomListController', ['$scope', function($scope) {
             });
         }));
 
-    };
+    };*/
 }]);

@@ -142,12 +142,16 @@ h2 {
 .autorisationForm {
     margin-top: 10px;
 }
+.autorisation {
+    height: 70px;
+}
 .myCursor {
     cursor: pointer
 }
 
 .listDecoration {
     list-style: none;
+    margin-bottom: 15px;
 }
 
 .alighRight {

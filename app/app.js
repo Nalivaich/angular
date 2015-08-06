@@ -8,20 +8,20 @@ chatModule.config(function($routeProvider) {
     $routeProvider
         // route for the home page
         .when('/', {
-            templateUrl : 'index.html',
-            controller  : 'aboutController'
+            templateUrl : 'autorisation.html',
+            controller  : 'LogInController'
         })
 
         // route for the about page
-        .when('/auto', {
-            templateUrl : 'views/autorisation.html',
-            controller  : 'aboutController'
+        .when('/greeting', {
+            templateUrl : 'greeting.html',
+            controller  : 'UserListController'
         })
 
         // route for the contact page
         .when('/contact', {
-            templateUrl : 'views/autorisation.html',
-            controller  : 'contactController'
+            templateUrl : 'example2.html',
+            controller  : 'ChatController'
         })
     .otherwise({ redirectTo: '/' });
 });

@@ -1,0 +1,11 @@
+
+<div class="container animated bounceInLeft autorisation" id="greeting">
+
+    <form class="form-inline autorisationForm">
+        <div data-bind="ifnot: authorizationFlag">
+            <div class="form-group col-md-offset-3">
+                <span class="text-success">Welcome: <span class="userName" ng-bind="currentUserName"></span></span>
+            </div>
+        </div>
+    </form>
+</div>
