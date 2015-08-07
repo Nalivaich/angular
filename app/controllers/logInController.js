@@ -16,10 +16,16 @@ chatModule.controller('LogInController', ['$scope', '$location', '$timeout',  fu
         elem.addClass('bounceOutRight');
         self.SetCurrentUserName(object.name);
         self.SetCurrentUserPass(object.password);
+        self.SetAuthorizationFlag(true);
         $timeout(function() {
             $location.path('/greeting');
         }, 900);
 
+        //use addUser to server with service method
+
+        var newObj = returnRoomModel(object);
+        self.addUser(newObj);
+        console.log(newObj);
         //$parent.parentScopeProperty
     };
 

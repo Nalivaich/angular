@@ -1,10 +1,10 @@
 
-<ul ng-repeat="item in usersRepository ">
+<ul ng-repeat="item in usersRepository " >
 
-    <li class=" bg-success row col-md-12 col-md-offset-0 text-success myCursor listDecoration animated bounceInUp" ng-click="click()" >
+    <li class="  row col-md-12 col-md-offset-0 text-success myCursor listDecoration animated bounceInUp" ng-click="showSomeText(item.id)"  ng-class="$odd ? 'odd' : 'even'">
         <p><span class="glyphicon glyphicon-user"></span></p>
         <p>User: <span ng-bind="item.name"></span></p>
-        <p>User ID:  <span ng-bind="$index"></span></p>
+        <p>User ID:  <span ng-bind="item.id"></span></p>
         <p>Status: Online</p>
     </li>
 

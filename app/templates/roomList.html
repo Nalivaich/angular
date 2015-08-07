@@ -1,6 +1,7 @@
-<div class=" bg-success row col-md-12 col-md-offset-0 text-success myCursor listDecoration animated bounceInUp" ng-click="clickFunc">
-    <p><span class="glyphicon glyphicon-comment"></span></p>
-    <p>Room name: <span ng-bind="name"></span></p>
-    <p>Private: <span ng-bind="private"></span></p>
-    <p>Number of Users: <span ng-bind="num"></span></p>
-</div>
+
+    <li class=" row col-md-12 col-md-offset-0 text-success myCursor listDecoration animated bounceInUp"  data-ng-Click="roomClick()"  ng-class="odd ? 'odd' : 'even'" >
+        <p><span class="glyphicon glyphicon-comment"></span></p>
+        <p>Room name: <span ng-bind="name"></span></p>
+        <p>Private: <span ng-bind="private"></span></p>
+        <p>Number of Users: <span ng-bind="num"></span></p>
+    </li>

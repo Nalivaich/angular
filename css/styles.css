@@ -158,4 +158,11 @@ h2 {
     text-align: right;
 }
 
+.odd {
+    background-color: #b2dba1;
+}
+
+.even {
+    background-color: #e7c3c3;
+}
 

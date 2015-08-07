@@ -10,7 +10,8 @@ chatModule.directive('myUser', function() {
             id: '=id',
             num: '=num',
             private: '=private',
-            clickFunc: '=click'
+            odd: '=odd',
+            roomClick: '&'
         },
         templateUrl: 'app/templates/roomList.html'
     };

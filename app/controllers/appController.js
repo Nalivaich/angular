@@ -6,7 +6,7 @@ chatModule.controller('AppController', ['$scope', function($scope) {
     var self = $scope;
     $scope.newArray= [1,2,3,4];
     self.greeting = 'Hola!';
-    self.usersRepository = [{name: 'some name'}, {name: 'some text else'}];
+    self.usersRepository = [{name: 'some name', id: 0}, {name: 'some text else', id: 1}];
     self.roomsRepository = [{name: 'some name'}, {name: 'some text else'}];
     self.messagesRepository = [];
     self.currentUser = {name:'', password: ''};
@@ -31,6 +31,19 @@ chatModule.controller('AppController', ['$scope', function($scope) {
     };
     self.SetCurrentUserPass = function(pass) {
         self.currentUserPassword = pass;
+    };
+    self.addUser = function(object) {
+        self.usersRepository.push(object);
+    };
+    self.SetAuthorizationFlag = function(newValue) {
+        self.authorizationFlag = newValue;
+    };
+    self.SetNewRoomName =function(newValue) {
+        self.newRoomName = newValue;
     }
+
+
+
+
 
 }]);

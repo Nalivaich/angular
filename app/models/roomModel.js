@@ -1,40 +1,42 @@
 /**
  * Created by vitali.nalivaika on 05.08.2015.
  */
+function returnRoomModel(data) {
+
+    function RoomModel(data) {
+        'use strict';
+
+        var self = this;
+
+        data = $.extend({
+            id: '',
+            createrId: 0,
+            name: '',
+            privateFlag: false,
+            usersIDInRoom: [],
+            messagesHistory: [],
+            external: ''
+        }, data);
 
 
-function RoomModel(data) {
-    'use strict';
+        self.id = data.id;
+        self.createrId = data.createrId;
+        self.name = data.name;
+        self.privateFlag = data.privateFlag;
+        self.usersIDInRoom = data.usersIDInRoom.map(function (currentvalue) {
+            return {
+                userIndex: currentvalue.userIndex
+            };
+        });
+        self.messagesHistory = data.usersIDInRoom.map(function (currentvalue) {
+            return {
+                message: currentvalue.message,
+                userId: currentvalue.userId
+            };
+        });
+        self.external = data.external;
 
-    var self = this;
+    }
 
-    data = $.extend({
-        id: '',
-        createrId: 0,
-        name: '',
-        privateFlag: false,
-        usersIDInRoom: [],
-        messagesHistory: [],
-        external: ''
-    }, data);
-
-
-    self.id = ko.observable( data.id );
-    self.createrId = ko.observable(data.createrId );
-    self.name = ko.observable(data.name );
-    self.privateFlag = ko.observable(data.privateFlag );
-    self.usersIDInRoom = ko.observableArray(data.usersIDInRoom.map(function (currentvalue) {
-        return {
-            userIndex: ko.observable(currentvalue.userIndex)
-        };
-    }));
-    self.messagesHistory = ko.observableArray(data.usersIDInRoom.map(function (currentvalue) {
-        return {
-            message: ko.observable(currentvalue.message),
-            userId: ko.observable(currentvalue.userId)
-        };
-    }));
-    self.external = ko.observable(data.external );
-
+return new RoomModel(data);
 }
-//return RoomModel;

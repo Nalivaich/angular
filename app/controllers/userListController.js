@@ -8,12 +8,17 @@ chatModule.controller('UserListController', ['$scope', 'userService', function($
     self.newArray= [1,2,3,4];
     self.templates =
         [ { name: 'template1.html', url: 'app/templates/userList.html'},
-            { name: 'template2.html', url: 'autorisation.html'} ];
+            { name: 'template2.html', url: 'app/templates/roomDialog.html'} ];
     self.userBlock = $scope.templates[0];
+
 
     self.show = function() {
 
         userService.show();
+    };
+
+    self.showSomeText = function(id) {
+      alert(id);
     };
 
 

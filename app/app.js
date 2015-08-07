@@ -2,7 +2,7 @@
  * Created by vitali.nalivaika on 05.08.2015.
  */
 
-var chatModule = angular.module('chatModule', ['ngRoute']);
+var chatModule = angular.module('chatModule', ['ngRoute', 'ui.bootstrap']);
 
 chatModule.config(function($routeProvider) {
     $routeProvider

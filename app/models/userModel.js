@@ -1,37 +1,38 @@
 /**
  * Created by vitali.nalivaika on 05.08.2015.
  */
+function returnUserModel(data) {
 
+    function UserModel(data) {
+        'use strict';
 
-function UserModel(data) {
-    'use strict';
+        var self = this;
 
-    var self = this;
+        data = $.extend({
+            id: 0,
+            name: '',
+            lastName: '',
+            password: '',
+            userRooms: [],
+            external: ''
+        }, data);
 
-    data = $.extend({
-        id: 0,
-        name: '',
-        lastName: '',
-        password: '',
-        userRooms: [],
-        external: ''
-    }, data);
+        self.id = data.id;
+        self.name = data.name;
+        self.lastName = data.lastName;
+        self.password = data.password;
+        self.userRooms = data.userRooms.map(function (currentvalue) {
+            return {
+                roomIndex: currentvalue.roomIndex
+            };
+        });
+        self.external = data.external;
 
-    self.id = ko.observable(data.id);
-    self.name = ko.observable(data.name);
-    self.lastName = ko.observable(data.lastName);
-    self.password = ko.observable(data.password);
-    self.userRooms = ko.observableArray(data.userRooms.map(function (currentvalue) {
-        return {
-            roomIndex: ko.observable(currentvalue.roomIndex)
+        self.fullName = function () {
+            return (self.name() + " " + self.lastName());
         };
-    }));
-    self.external = ko.observable(data.external);
 
-    self.fullName = ko.computed(function() {
-        return (self.name() + " " + self.lastName());
-    });
+    }
 
+return new UserModel(data);
 }
-
-//return UserModel;

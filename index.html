@@ -8,6 +8,8 @@
     <script src="app/js/jquery-1.11.3.min.js" type="text/javascript"></script>
     <link href="bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" />
     <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js" type="text/javascript"></script>
+
+
     <link type="text/css" rel="stylesheet" href="css/animate.css">
 </head>
 <body>
@@ -21,7 +23,7 @@
         <div class="row sectionBlock">
             <div class="col-md-2 sectionCols addScroll" ng-controller="UserListController" >
                 <h2 class="text-success col-md-6 col-md-offset-3">Users List: </h2>
-                <div class="slide-animate" ng-include="userBlock.url" ng-model="template">
+                <div class="slide-animate" ng-include="userBlock.url" ng-model="template" >
 
                 </div>
 
@@ -50,51 +52,53 @@
                 </div>
             </div>
             <div class="col-md-2 sectionCols addScroll" ng-controller="RoomListController">
-
                 <div class=" createNewRoom">
                     <span ng-bind="newRoomName"></span>
                     <div class="row col-md-offset-3" >
-
-                        <input type="button" value="Create new room" class="btn btn-primary" data-toggle="modal" ng-include="roomBlock.url" href="#newRoomModal"   data-bind="enable: authorizationFlag" />
+                        <input type="button" value="Create new room" class="btn btn-primary" ng-click="open('md')" ng-disabled="!authorizationFlag" />
                         <label class="text-primary">Use private Mode: <input type="checkbox" ng-model="privateFlag" ng-true-value="true" ng-false-value="false"/></label>
                     </div>
-
                     <h2 class="text-success col-md-6 col-md-offset-3">Rooms List: </h2>
-
-                    <ul class="usersList" ng-repeat="item in roomsRepository ">
-                        <li class="listDecoration">
-                            <my-user name="item.name" id="item.id" private="item.private" click="showAlert">
+                    <ul class="usersList" ng-repeat="item in roomsRepository " >
+                            <my-user name="item.name" id="item.id" private="item.private" odd="$odd" ng-click="showAlert(item.name)" >
                             </my-user>
-                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Dialog window-->
-<div id="newRoomModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title text-primary">You want create new room</h4>
-            </div>
-            <div class="modal-body">
-                <p class="">Please enter the name of your new room: </p>
-                <div>
-                    <input type="text" class="newRoomNameInput form-control" name="newRoomNameInput" data-bind="value: newRoomName" placeholder="Room name" />
+
+
+
+
+
+    <!-- Dialog window-->
+    <div id="newRoomModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title text-primary">You want create new room</h4>
                 </div>
-                <p class="text-warning"><small>Name of the room allowing users to quickly find it</small></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" ng-model="newRoomName" ng-click="sayAlert()" data-dismiss="modal">Create</button>
+                <div class="modal-body">
+                    <p class="">Please enter the name of your new room: </p>
+                    <div>
+                        <input type="text" class="newRoomNameInput form-control" name="newRoomNameInput" data-bind="value: newRoomName" placeholder="Room name" />
+                    </div>
+                    <p class="text-warning"><small>Name of the room allowing users to quickly find it {{greeting}}</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-model="newRoomName" ng-click="showAlert()" data-dismiss="modal">Create</button>
+                </div>
             </div>
         </div>
     </div>
+
+
 </div>
+
 
 
 <div id="userList" class="modal fade">
@@ -151,8 +155,16 @@
 <script src="app/js/angular.js" type="text/javascript"></script>
 <!--<script src="app/js/angular.min.js" type="text/javascript"></script>-->
 <script src="app/js/angular-route.js" type="text/javascript"></script>
+<script src="app/js/ui-bootstrap-0.13.1.js" type="text/javascript"></script>
+<script src="app/js/ui-bootstrap-tpls-0.13.1.js" type="text/javascript"></script>
+
 <script src="app/js/lodash.js" type="text/javascript"></script>
 <script src="app/app.js" type="text/javascript"></script>
+
+<script src="app/models/userModel.js" type="text/javascript"></script>
+<script src="app/models/messageModel.js" type="text/javascript"></script>
+<script src="app/models/roomModel.js" type="text/javascript"></script>
+
 <script src="app/services/userService.js" type="text/javascript"></script>
 
 <script src="app/controllers/appController.js" type="text/javascript"></script>
