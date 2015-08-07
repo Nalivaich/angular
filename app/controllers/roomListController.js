@@ -20,7 +20,7 @@ chatModule.controller('RoomListController', ['$scope', '$modal', '$log', functio
 
 
 
-    $scope.open = function (size) {
+    self.open = function (size) {
         self.SetNewRoomName('');
         var modalInstance = $modal.open({
             animation: true,
@@ -40,16 +40,20 @@ chatModule.controller('RoomListController', ['$scope', '$modal', '$log', functio
             $log.info('Modal dismissed at: ' + new Date());
         });
 
-        $scope.ok = function (value) {
+        self.ok = function (value) {
             console.log(value);
             self.SetNewRoomName(value);
             modalInstance.dismiss('cancel');
+            self.addRoom({name: value});
             //modalInstance.close($scope.selected.item);
         };
 
-        $scope.cancel = function () {
+        self.cancel = function () {
             modalInstance.dismiss('cancel');
         };
+    };
+    self.changeCurrentRoom = function(newId) {
+        self.SetCurrentRoomId(newId);
     };
 
 

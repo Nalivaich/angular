@@ -42,13 +42,13 @@
                     </ul>
                 </div>
                 <div data-bind="css:{roomControl: authorizationFlag() == false} ">
-            <textarea class="sendMessageArea" data-bind="textInput: currentMessage, enable: activeRoomFlag">
-                Input your text
+            <textarea class="sendMessageArea" placeholder=" Input your text" ng-model="currentMessage">
+
             </textarea>
-                    <input type="button" value="Send message" class="btn btn-success" data-bind="click: addMessage, enable: activeRoomFlag"/>
-                    <input type="button" value="Add new user" class="btn btn-primary" name="123123" data-bind="enable: roomCreaterFlag" data-toggle="modal" href="#userList" />
-                    <input type="button" value="Remove user" class="btn btn-danger" data-bind="enable: roomCreaterFlag" data-toggle="modal" href="#userList" />
-                    <input type="button" value="Remove room" class="btn btn-danger removeRoomButton" data-bind="click: removeRoom,enable: roomCreaterFlag" />
+                    <input type="button" value="Send message" class="btn btn-success" ng-click="sendMessage()"/>
+                    <input type="button" value="Add new user" class="btn btn-primary" ng-click="open(true)" />
+                    <input type="button" value="Remove user" class="btn btn-danger" ng-click="open(false)" />
+                    <input type="button" value="Remove room" class="btn btn-danger removeRoomButton" ng-click="removeRoom()" />
                 </div>
             </div>
             <div class="col-md-2 sectionCols addScroll" ng-controller="RoomListController">
@@ -60,7 +60,7 @@
                     </div>
                     <h2 class="text-success col-md-6 col-md-offset-3">Rooms List: </h2>
                     <ul class="usersList" ng-repeat="item in roomsRepository " >
-                            <my-user name="item.name" id="item.id" private="item.private" odd="$odd" ng-click="showAlert(item.name)" >
+                            <my-user name="item.name" id="item.id" private="item.private" odd="$odd" ng-click="changeCurrentRoom(item.id)"   >
                             </my-user>
                     </ul>
                 </div>
