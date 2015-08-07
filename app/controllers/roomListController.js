@@ -53,7 +53,9 @@ chatModule.controller('RoomListController', ['$scope', '$modal', '$log', functio
         };
     };
     self.changeCurrentRoom = function(newId) {
+
         self.SetCurrentRoomId(newId);
+        //alert('newRoomId = ' + newId + ' curRoomId' + self.currentRoomId);
     };
 
 

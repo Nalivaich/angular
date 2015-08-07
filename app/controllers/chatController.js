@@ -58,14 +58,22 @@ chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout',
 
     self.removeRoom = function(roomId) {
         //add service method for remove room on DB
-
-        var elem = $('#roomListItem');
+        var str = '.cl' + roomId;
+        var elem = $(str);
         elem.removeClass('bounceInUp');
         elem.addClass('bounceOutRight');
 
+        /*$('.roomListItem').each(function() {
+            alert(this.ng-bind);
+           if(this.id == roomId) {
+               this.removeClass('bounceInUp');
+               this.addClass('bounceOutRight');
+           }
+        });*/
+
         $timeout(function() {
             self.removeRoomObject(self.currentRoomId);
-        }, 900);
+        }, 700);
 
         console.log(self.roomsRepository);
     }

@@ -3,11 +3,12 @@
  */
 
 chatModule.directive('myUser', function() {
+    var pp = 123;
     return {
         restrict: 'AEC',
         scope:{
             name: '=name',
-            id: '=id',
+            id:   '=id' ,
             num: '=num',
             private: '=private',
             odd: '=odd',
