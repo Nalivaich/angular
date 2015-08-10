@@ -27,40 +27,41 @@
 
                 </div>
 
-
             </div>
             <div class="col-md-8 sectionCols " ng-controller="ChatController">
                 <div class="usersInRoom" data-bind="with: currentRoom">
-                    <p>You are in a room: <span data-bind="text: name"></span></p>
+                    <p>You are in a room: <span ng-bind="getCurrentRoom().name"></span></p>
                     <span>Curent Users: </span>
-                    <div data-bind="foreach: usersIDInRoom" class="text-danger">
-                        <span data-bind="text: $root.usersRepository()[userIndex()].fullName "></span><span>, </span>
+                    <div ng-repeat="item in getCurrentRoom().usersIDInRoom" class="text-danger">
+                        <span ng-bind="getUserByID(item.userIndex).fullName()" data-bind="text: $root.usersRepository()[userIndex()].fullName "></span><span>, </span>
                     </div>
                 </div>
                 <div class="allMessageArea addScroll" data-bind="with: currentRoom">
-                    <ul class="usersList" data-bind="template: {name: 'messageTemplate', foreach: messagesHistory}">
+                    <ul class="usersList" ng-repeat="item in getCurrentRoom().messagesHistory" data-bind="template: {name: 'messageTemplate', foreach: messagesHistory}">
+                        <li class="row col-md-11 col-md-offset-1 text-success">
+                            <p><span ng-bind="item.message"></span></p>
+                        </li>
                     </ul>
                 </div>
                 <div data-bind="css:{roomControl: authorizationFlag() == false} ">
             <textarea class="sendMessageArea" placeholder=" Input your text" ng-model="currentMessage">
 
             </textarea>
-                    <input type="button" value="Send message" class="btn btn-success" ng-click="sendMessage()"/>
-                    <input type="button" value="Add new user" class="btn btn-primary" ng-click="open(true)" />
-                    <input type="button" value="Remove user" class="btn btn-danger" ng-click="open(false)" />
-                    <input type="button" value="Remove room" class="btn btn-danger removeRoomButton" ng-click="removeRoom(currentRoomId)" />
+                    <input type="button" value="Send message" class="btn btn-success" ng-click="sendMessage()" ng-disabled="!activeRoomFlag" />
+                    <input type="button" value="Add new user" class="btn btn-primary" ng-click="open(true)" ng-disabled="!roomCreaterFlag" />
+                    <input type="button" value="Remove user" class="btn btn-danger" ng-click="open(false)" ng-disabled="!roomCreaterFlag" />
+                    <input type="button" value="Remove room" class="btn btn-danger removeRoomButton" ng-click="removeRoom(currentRoomId)" ng-disabled="!roomCreaterFlag" />
                 </div>
             </div>
             <div class="col-md-2 sectionCols addScroll" ng-controller="RoomListController">
                 <div class=" createNewRoom">
-                    <span ng-bind="newRoomName"></span>
                     <div class="row col-md-offset-3" >
                         <input type="button" value="Create new room" class="btn btn-primary" ng-click="open('md')" ng-disabled="!authorizationFlag" />
                         <label class="text-primary">Use private Mode: <input type="checkbox" ng-model="privateFlag" ng-true-value="true" ng-false-value="false"/></label>
                     </div>
                     <h2 class="text-success col-md-6 col-md-offset-3">Rooms List: </h2>
                     <ul class="usersList" ng-repeat="item in roomsRepository " >
-                            <my-user name="item.name" id="'cl' + item.id" private="item.private" odd="$odd" ng-click="changeCurrentRoom(item.id)"   >
+                            <my-user num="item.usersIDInRoom.length" name="item.name" id="'cl' + item.id" private="item.privateFlag" odd="$odd" ng-click="changeCurrentRoom(item.id, item.privateFlag)"   >
                             </my-user>
                     </ul>
                 </div>
@@ -166,6 +167,9 @@
 <script src="app/models/roomModel.js" type="text/javascript"></script>
 
 <script src="app/services/userService.js" type="text/javascript"></script>
+<script src="app/services/roomService.js" type="text/javascript"></script>
+<script src="app/services/messageService.js" type="text/javascript"></script>
+
 
 <script src="app/controllers/appController.js" type="text/javascript"></script>
 <script src="app/controllers/userListController.js" type="text/javascript"></script>

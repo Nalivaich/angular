@@ -2,7 +2,7 @@
  * Created by vitali.nalivaika on 06.08.2015.
  */
 
-chatModule.controller('LogInController', ['$scope', '$location', '$timeout',  function($scope, $location,  $timeout) {
+chatModule.controller('LogInController', ['$scope', '$location', '$timeout', 'userService',  function($scope, $location,  $timeout, userService) {
     var self = $scope;
 
     var pp = $("#autorisation");
@@ -21,12 +21,18 @@ chatModule.controller('LogInController', ['$scope', '$location', '$timeout',  fu
             $location.path('/greeting');
         }, 900);
 
-        //use addUser to server with service method
-
-        var newObj = returnRoomModel(object);
-        self.addUser(newObj);
-        console.log(newObj);
-        //$parent.parentScopeProperty
+        userService.add({
+            name: self.currentUserName,
+            password: self.currentUserPassword
+        }, function (newObject) {
+            var newUser = returnUserModel(newObject);
+            self.addNewUser(newUser);
+            self.SetCurrentUserId(newUser.id);
+            self.SetAuthorizationFlag(true);
+            return true;
+        }, function () {
+            console.log('can\'t add user');
+        });
     };
 
 }]);

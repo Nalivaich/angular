@@ -29,7 +29,7 @@ function returnUserModel(data) {
         self.external = data.external;
 
         self.fullName = function () {
-            return (self.name() + " " + self.lastName());
+            return (self.name + " " + self.lastName);
         };
 
     }

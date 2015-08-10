@@ -6,7 +6,7 @@
 <div class="modal-body">
     <p class="text-success" >Please choose user to {{make}} your room </p>
     <div ng-repeat="user in usersRepository" class="myCursor">
-        <p ng-click="choseUser(user.id)" class="text-primary alignClass" ng-bind="user.name"></p>
+        <p ng-click="choseUser(user.id, make)" class="text-primary alignClass" ng-bind="user.name"></p>
     </div>
 </div>
 <div class="modal-footer">

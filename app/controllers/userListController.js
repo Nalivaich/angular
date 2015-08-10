@@ -12,15 +12,11 @@ chatModule.controller('UserListController', ['$scope', 'userService', function($
     self.userBlock = $scope.templates[0];
 
 
-    self.show = function() {
-
-        userService.show();
+    self.findFullName = function(userID) {
+        var observableUser = $.grep(self.usersRepository, function(item) {
+            return item.id === userID;
+        })[0];
+        alert( observableUser.fullName() );
     };
 
-    self.showSomeText = function(id) {
-      alert(id);
-    };
-
-
-    //self.show = userService.show();
 }]);
