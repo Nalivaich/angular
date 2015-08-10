@@ -3,7 +3,6 @@
  */
 
 chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout', 'roomService', 'messageService', function($scope, $modal, $log, $timeout, roomService, messageService) {
-    $scope.greeting = 'Hola!';
     var self = $scope;
     self.setMode = {};
     self.make = '';
@@ -19,7 +18,6 @@ chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout',
             return item.id == userId;
         })[0];
     };
-
 
     self.open = function (mode) {
         if(mode) {
@@ -49,18 +47,10 @@ chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout',
         self.choseUser = function(userId, make) {
             modalInstance.dismiss('cancel');
             if(make.length < 9) {
-
-                self.addUserToRoom(self.currentRoomId, userId);
+                self.addUserToRoom(userId, self.currentRoomId);
             } else {
-
+                self.removeUserFromRoom(userId, self.currentRoomId);
             }
-        };
-
-        self.ok = function (value) {
-            console.log(value);
-            self.SetNewRoomName(value);
-            modalInstance.dismiss('cancel');
-            self.addNewRoom({name: value});
         };
 
         self.cancel = function () {
@@ -68,13 +58,13 @@ chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout',
         };
     };
 
+    self.activeState = {};
     self.sendMessage = function(message) {
         self.addMessageInRep({
             idRoom: self.currentRoomId,
             idUser: self.currentUserId,
             message: self.currentMessage
         });
-
 
         self.addMessageInRoom({
             currentRoomId: self.currentRoomId,
@@ -94,7 +84,7 @@ chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout',
             self.refresh();
             return true;
         }, function () {
-            console.log('can\'t add message');
+            console.log('can\'t add message in roomHistory');
         });
     };
 
@@ -108,45 +98,33 @@ chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout',
             self.messagesRepository.push(newObj);
             return true;
         }, function () {
-
+            console.log('can\'t add message in repository');
         });
     };
 
-
-
     self.removeRoom = function(roomId) {
-        var str = '.cl' + roomId;
-        var elem = $(str);
-        elem.removeClass('bounceInUp');
-        elem.addClass('bounceOutRight');
-
         self.remove(self.currentRoomId, function(param) {
             self.SetCurrentRoomId(param);
             self.setRoomCreaterFlag(self.isCurrentUserRoom(self.currentRoomId, self.currentUserId));
             self.setActiveRoomFlag(false);
             self.refresh();
         });
-
-        /*$timeout(function() {
-
-        }, 700);*/
-
-        console.log(self.roomsRepository);
     };
 
     self.remove = function(currentRoomIndex, nextFunction) {
         roomService.remove({
             id: ''
         }, function() {
-            /*var index;
-            for(var i = 0; i <  self.roomsRepository.length; i++) {
-                if(self.roomsRepository[i].id == currentRoomIndex) {
-                    index = i;
-                }
-            }*/
 
-            self.removeRoomObject(currentRoomIndex);
-            //self.roomsRepository.splice(index, 1);
+            var str = '.cl' + currentRoomIndex;
+            var elem = $(str);
+            elem.removeClass('bounceInUp');
+            elem.addClass('bounceOutRight');
+
+            $timeout(function() {
+                self.removeRoomObject(currentRoomIndex);
+            }, 700);
+
             nextFunction('');
 
             return true;
@@ -155,5 +133,37 @@ chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout',
         });
     };
 
+    self.removeUserFromRoom = function(userId, currentRoomId) {
+        roomService.removeUserFromRoom({
+            userIndex: userId
+        }, {
+            id: currentRoomId
+        }, function() {
+
+            console.log(self.roomsRepository);
+            var observableRoom = $.grep(self.roomsRepository, function(item) {
+                return item.id === currentRoomId;
+            })[0];
+
+            if (!observableRoom) {
+                return;
+            }
+
+            var foundUserInRoom = $.grep(observableRoom.usersIDInRoom, function (userItem, index) {
+
+                return userItem.userIndex === userId;
+            });
+            if (foundUserInRoom.length) {
+                observableRoom.usersIDInRoom = _.filter(observableRoom.usersIDInRoom, function(n) {
+                    return n.userIndex !== userId;
+                });
+
+                self.$apply();
+            }
+        }, function() {
+            console.log('can\'t add user to room');
+        });
+
+    }
 
 }]);

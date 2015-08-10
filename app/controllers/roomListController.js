@@ -3,7 +3,6 @@
  */
 
 chatModule.controller('RoomListController', ['$scope', '$modal', '$log', 'roomService', 'userService', function($scope, $modal, $log, roomService, userService) {
-    $scope.greeting = 'Holaaaaaa!';
     var self = $scope;
 
     self.templates =
@@ -25,18 +24,9 @@ chatModule.controller('RoomListController', ['$scope', '$modal', '$log', 'roomSe
             }
         });
 
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-
         self.ok = function (value) {
-
             self.SetNewRoomName(value);
             modalInstance.dismiss('cancel');
-
-            //alert('self.newRoomName ' + self.newRoomName + 'self.currentUserId ' + self.currentUserId + 'self.privateFlag ' + self.privateFlag);
 
             self.addRoom(self.newRoomName, self.currentUserId, self.privateFlag, function(newId) {
                 self.SetCurrentRoomId(newId);
@@ -69,7 +59,6 @@ chatModule.controller('RoomListController', ['$scope', '$modal', '$log', 'roomSe
         self.addUserToRoom(self.currentUserId, self.currentRoomId);
         self.setActiveRoomFlag(true);
     };
-
 
     self.addRoom = function(name, createrID, privateFlag, nextfunction) {
         roomService.add({
@@ -110,19 +99,6 @@ chatModule.controller('RoomListController', ['$scope', '$modal', '$log', 'roomSe
         });
 
     };
-
-    /*self.addUserToRoom = function(userId, roomId) {
-        var newRoomId;
-        if(roomId == undefined) {
-            newRoomId = self.currentRoomId
-        } else {
-            newRoomId = roomId;
-        }
-
-        self.addUserToRoom(userId, newRoomId);
-    };*/
-
-
 
     self.isUserInRoom = function(userIndex, currentRoomIndex, nextFunction) {
         if(currentRoomIndex === '' || currentRoomIndex === '') {

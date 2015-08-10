@@ -4,13 +4,10 @@
 
 chatModule.controller('AppController', ['$scope', 'userService', 'roomService', function($scope, userService, roomService) {
     var self = $scope;
-    $scope.newArray= [1,2,3,4];
-    self.greeting = 'Hola!';
     self.usersRepository = [];
     self.roomsRepository = [];
     self.messagesRepository = [];
     self.currentUser = {name:'', password: ''};
-
     self.currentUser = {};
     self.currentUserName = 'Guest';
     self.currentUserPassword = '';
@@ -61,7 +58,6 @@ chatModule.controller('AppController', ['$scope', 'userService', 'roomService', 
         });
     };
 
-
     self.SetCurrentUserName = function(name) {
         self.currentUserName = name;
     };
@@ -100,13 +96,10 @@ chatModule.controller('AppController', ['$scope', 'userService', 'roomService', 
         $scope.$apply();
     };
 
-
-
     self.isCurrentUserRoom = function(currentRoomIndex, currentUserIndex) {
         if(currentRoomIndex === '' || currentUserIndex === '') {
             return false;
         }
-
         var observableUser = $.grep(self.usersRepository, function(item) {
             return item.id === currentUserIndex;
         })[0];
@@ -120,20 +113,17 @@ chatModule.controller('AppController', ['$scope', 'userService', 'roomService', 
         } else {
             return true;
         }
-
     };
 
-
-    self.addUserToRoom = function(userIndex, currentRoomIndex, nextfunction) {
-        console.log(userIndex, currentRoomIndex);
+    self.addUserToRoom = function(userId, currentRoomId, nextfunction) {
         roomService.addUserToRoom({
-            userIndex: userIndex
+            userIndex: userId
         }, {
-            id: currentRoomIndex
+            id: currentRoomId
         }, function() {
 
             var observableRoom = $.grep(self.roomsRepository, function(item) {
-                return item.id === currentRoomIndex;
+                return item.id === currentRoomId;
             })[0];
 
             if (!observableRoom) {
@@ -142,22 +132,17 @@ chatModule.controller('AppController', ['$scope', 'userService', 'roomService', 
 
             var foundUserInRoom = $.grep(observableRoom.usersIDInRoom, function (userItem, index) {
 
-                return userItem.userIndex === userIndex;
+                return userItem.userIndex === userId;
             });
             if (!foundUserInRoom.length) {
                 observableRoom.usersIDInRoom.push({
-                    userIndex: userIndex
+                    userIndex: userId
                 });
-
                 self.$apply();
             }
         }, function() {
             console.log('can\'t add user to room');
         });
     };
-
-
-
-
 
 }]);

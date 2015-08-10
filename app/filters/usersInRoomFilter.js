@@ -57,7 +57,6 @@ chatModule.filter('formatText', function(){
         });
 
         return UsersOutsideRoom;
-
     }
 
     function findUsersOutsideRoom (allUsersId, allUsersIdInRoom, userRep) {

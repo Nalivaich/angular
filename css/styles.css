@@ -165,3 +165,9 @@ h2 {
 .even {
     background-color: #e7c3c3;
 }
+.userInRoomList {
+    display: inline-block;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}

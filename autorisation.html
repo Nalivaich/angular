@@ -1,14 +1,12 @@
 
 <div class="container animated bounceInLeft autorisation" id="autorisation">
-
     <form class="form-inline autorisationForm" name="logInForm">
         <fieldset>
-            <div data-bind="ifnot: authorizationFlag">
+            <div >
                 <div class="form-group col-md-offset-3">
                     <label class="sr-only" for="exampleInputName3">User name</label>
                     <input type="text" class="form-control" id="exampleInputName3" placeholder="UserName" name="loginInput" required  ng-model="currentUser.name">
                 </div>
-
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputPassword3">Password</label>
                     <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" name="passwordInput" required   ng-model="currentUser.password">
@@ -16,27 +14,5 @@
                 <button type="submit" class="btn btn-success " ng-click="signUp(currentUser, logInForm)">Sign in</button>
             </div>
         </fieldset>
-
     </form>
-
 </div>
-
-
-<!--<form class="form-inline autorisationForm">
-    <div data-bind="ifnot: authorizationFlag">
-        <div class="form-group col-md-offset-3">
-            <label class="sr-only" for="exampleInputName3">User name</label>
-            <input type="text" class="form-control" id="exampleInputName3" placeholder="LogIn" name="loginInput" data-bind="value: currentUserName, click: function() {currentUserName('');}">
-        </div>
-        <div class="form-group">
-            <label class="sr-only" for="exampleInputPassword3">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" name="passwordInput" data-bind="value: currentUserPassword">
-        </div>
-        <button type="submit" class="btn btn-success " data-bind="click: readUserInfo">Sign in</button>
-    </div>
-
-    <div class = "greetingBlock inlineBlocks" data-bind="if: authorizationFlag">
-        <span class="text-success">Welcome: <span class="userName" data-bind="text: currentUserName"></span></span>
-
-    </div>
-</form>-->

@@ -11,6 +11,7 @@ chatModule.controller('LogInController', ['$scope', '$location', '$timeout', 'us
         if(!form.$valid){
             return false;
         }
+
         var elem = $('#autorisation');
         elem.removeClass('bounceInLeft');
         elem.addClass('bounceOutRight');

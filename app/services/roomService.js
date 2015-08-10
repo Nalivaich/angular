@@ -54,6 +54,27 @@ chatModule.service('roomService' ,[ function() {
         });
     };
 
+    self.removeUserFromRoom = function(user, room, onSuccess, onError) {
+        asyncImitation(function() {
+
+            var foundItem = $.grep(rooms, function (item) {
+                return item.id === room.id;
+            })[0];
+            var foundUserInRoom = $.grep(foundItem.usersIDInRoom, function (userItem) {
+
+                return userItem.userIndex === user.userIndex;
+            });
+
+            if (foundUserInRoom.length) {
+                foundItem.usersIDInRoom = _.filter(foundItem.usersIDInRoom, function(n) {
+                    return n.userIndex !== user.userIndex;
+                });
+            }
+
+            onSuccess();
+        });
+    };
+
     self.getAll = function(onSuccess, onError) {
         asyncImitation(function() {
             onSuccess(rooms);
