@@ -89,7 +89,7 @@ chatModule.controller('ChatController', ['$scope', '$modal', '$log', '$timeout',
     };
 
     self.addMessageInRep = function(data) {
-        var newMessageObject = new returnMessageModel({
+        var newMessageObject = new MessageModel({
             idRoom: data.idRoom,
             idUser: data.idUser,
             message: data.message

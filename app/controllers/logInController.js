@@ -26,7 +26,7 @@ chatModule.controller('LogInController', ['$scope', '$location', '$timeout', 'us
             name: self.currentUserName,
             password: self.currentUserPassword
         }, function (newObject) {
-            var newUser = returnUserModel(newObject);
+            var newUser = UserModel(newObject);
             self.addNewUser(newUser);
             self.SetCurrentUserId(newUser.id);
             self.SetAuthorizationFlag(true);

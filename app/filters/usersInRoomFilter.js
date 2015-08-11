@@ -15,9 +15,8 @@ chatModule.filter('formatText', function(){
 
         if(mode.length < 9 ) {
             return findUsersOutsideRoom (allUsersId, allUsersIdInRoom, userRep);
-        } else {
-            return findUsersInsideRoom (allUsersIdInRoom, userRep , userId);
         }
+        return findUsersInsideRoom (allUsersIdInRoom, userRep , userId);
     };
 
     function findAllUsersId (userRep) {

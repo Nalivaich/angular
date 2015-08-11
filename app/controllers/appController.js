@@ -24,7 +24,7 @@ chatModule.controller('AppController', ['$scope', 'userService', 'roomService', 
     self.getAllUsers = function getAll() {
         userService.getAll(function(receivedUsers) {
             $.each(receivedUsers, function(index, receivedUser) {
-                self.usersRepository.push(new returnUserModel(receivedUser));
+                self.usersRepository.push(new UserModel(receivedUser));
             });
             $scope.$apply();
         }, function() {
@@ -35,7 +35,7 @@ chatModule.controller('AppController', ['$scope', 'userService', 'roomService', 
     self.getAllRooms = function getAll() {
         roomService.getAll(function(receivedRooms) {
             $.each(receivedRooms, function(index, receivedRoom) {
-                self.roomsRepository.push(new returnRoomModel(receivedRoom));
+                self.roomsRepository.push(new RoomModel(receivedRoom));
             });
             $scope.$apply();
         }, function() {
@@ -53,9 +53,7 @@ chatModule.controller('AppController', ['$scope', 'userService', 'roomService', 
     };
 
     self.removeRoomObject = function(roomId) {
-        self.roomsRepository = _.filter(self.roomsRepository, function(n) {
-            return n.id != roomId;
-        });
+        self.roomsRepository = _.filter(self.roomsRepository, 'id');
     };
 
     self.SetCurrentUserName = function(name) {
@@ -108,11 +106,7 @@ chatModule.controller('AppController', ['$scope', 'userService', 'roomService', 
             return userItem.roomIndex === currentRoomIndex;
         });
 
-        if (!foundUserInRoom.length) {
-            return false;
-        } else {
-            return true;
-        }
+        return foundUserInRoom.length;
     };
 
     self.addUserToRoom = function(userId, currentRoomId, nextfunction) {

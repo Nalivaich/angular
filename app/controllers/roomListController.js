@@ -69,7 +69,7 @@ chatModule.controller('RoomListController', ['$scope', '$modal', '$log', 'roomSe
                 userIndex: createrID
             }]
         }, function(room) {
-            var newRoom = new returnRoomModel(room);
+            var newRoom = new RoomModel(room);
             self.addNewRoom(newRoom);
             nextfunction(newRoom.id);
 
@@ -114,11 +114,7 @@ chatModule.controller('RoomListController', ['$scope', '$modal', '$log', 'roomSe
             return userItem.userIndex === userIndex;
         });
 
-        if (!foundUserInRoom.length) {
-            return false;
-        } else {
-            return true;
-        }
+        return foundUserInRoom.length;
     }
 
 

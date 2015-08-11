@@ -38,8 +38,8 @@
                         </li>
                     </ul>
                 </div>
-                <div ng-class="authorizationFlag ? '' : 'roomControl'">
-            <textarea class="sendMessageArea" placeholder=" Input your text" ng-model="currentMessage "  ng-disabled="!activeRoomFlag">
+                <div ng-class="{ roomControl: !authorizationFlag }">
+            <textarea class="sendMessageArea" placeholder=" Input your text" ng-model="$parent.currentMessage "  ng-disabled="!activeRoomFlag">
 
             </textarea>
                     <input type="button" value="Send message" class="btn btn-success" ng-click="sendMessage()" ng-disabled="!activeRoomFlag" />
